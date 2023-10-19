@@ -20,6 +20,7 @@ if ($BuildPart -contains 'win') {
 	foreach ($Configuration in $Configurations) {
 		foreach ($Platform in $Platforms) {
 			Write-Host Build dokan $Configuration $Platform ...
+			Exec-External { buildWrapper .\dokan.sln /p:Configuration=$Configuration /p:Platform=$Platform /t:Clean } # Added 10/19
 			Exec-External { buildWrapper .\dokan.sln /p:Configuration=$Configuration /p:Platform=$Platform /t:Build $CI_BUILD_ARG }
 			Write-Host Build dokan $Configuration $Platform done !
 		}
